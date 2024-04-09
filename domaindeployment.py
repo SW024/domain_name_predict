@@ -7,7 +7,7 @@ import numpy as np
 model = joblib.load('domain_rf_model.joblib')
 
 # Define the structure of your web app
-st.title('Random Forest Model Deployment')
+st.title('Domain Name Values Prediction')
 
 # File uploader allows user to add their own CSV
 uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
@@ -22,14 +22,17 @@ if uploaded_file is not None:
         # Let the user select a domain to predict
         selected_domain = st.selectbox('Select a Domain to Predict', data['Name'].unique())
         
-        # Get the features of the selected domain
         domain_features = data[data['Name'] == selected_domain][['Age of Domain', 'TLD Score', 'Search Queries Occurrences', 'Length Score', 'Word Composition']]
-        
-        # Display the features in separate columns
+
+        # Get the features of the selected domain
         if not domain_features.empty:
             st.write('Features of the selected domain:')
-            st.table(domain_features.reset_index(drop=True))  # Display features in a table
-
+            feature_values = domain_features.iloc[0]
+            
+            # Display each feature in a separate text input field, which is read-only
+            for feature, value in feature_values.iteritems():
+                st.text_input(feature, value, disabled=True)
+                
             # Button to make prediction
             if st.button('Predict Domain Price'):
                 # Reshape the data for prediction
@@ -46,4 +49,8 @@ if uploaded_file is not None:
         else:
             st.error('No features found for the selected domain.')
     else:
-        st.error('CSV must have a Domain column.')
+        st.error('CSV must have a Domain Name column.')
+
+
+
+
