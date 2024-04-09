@@ -7,7 +7,7 @@ import numpy as np
 # Custom HTML and CSS for the title and button hover effect
 html_temp = """
     <div style="background-color:yellow;padding:15px">
-    <h1 style="color:black;text-align:center;">Flight Delay Prediction System</h1>
+    <h1 style="color:black;text-align:center;">Domain Name Values Prediction</h1>
     </div>
 
     <style>
