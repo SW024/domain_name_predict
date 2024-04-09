@@ -17,12 +17,12 @@ if uploaded_file is not None:
     st.write('Data Successfully Uploaded!')
     
     # Assuming there's a column in the CSV called 'Domain' which contains the domain names
-    if 'Domain' in data.columns:
+    if 'Name' in data.columns:
         # Let the user select a domain to predict
-        selected_domain = st.selectbox('Select a Domain to Predict', data['Domain'].unique())
+        selected_domain = st.selectbox('Select a Domain to Predict', data['Name'].unique())
         
         # Get the features of the selected domain
-        domain_features = data[data['Domain'] == selected_domain][['Age of Domain', 'TLD Score', 'Search Queries Occurrences', 'Length Score', 'Word Composition']]
+        domain_features = data[data['Name'] == selected_domain][['Age of Domain', 'TLD Score', 'Search Queries Occurrences', 'Length Score', 'Word Composition']]
         
         # Display the features
         if not domain_features.empty:
