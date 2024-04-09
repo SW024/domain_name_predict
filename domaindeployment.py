@@ -6,6 +6,24 @@ import numpy as np
 # Load your trained model
 model = joblib.load('domain_rf_model.joblib')
 
+# Define CSS style for the app
+def set_custom_style():
+    # Apply custom CSS to change background color and title color
+    custom_style = f"""
+        <style>
+            .reportview-container .main {{
+                background-color: black;  /* Set background color */
+            }}
+            h1 {{
+                color: yellow;  /* Set title color */
+            }}
+        </style>
+    """
+    st.markdown(custom_style, unsafe_allow_html=True)
+
+# Call the function to set custom styles
+set_custom_style()
+
 # Define the structure of your web app
 st.title('Domain Name Values Prediction')
 
