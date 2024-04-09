@@ -29,10 +29,11 @@ if uploaded_file is not None:
         if not domain_features.empty:
             st.write('Features of the selected domain:')
             st.text_input('Age of Domain', domain_features['Age of Domain'], disabled=True)
-            st.text_input('TLD Score', domain_features['TLD Score'], disabled=True)
-            st.text_input('Search Queries Occurrences', domain_features['Search Queries Occurrences'], disabled=True)
             st.text_input('Length Score', domain_features['Length Score'], disabled=True)
             st.text_input('Word Composition', domain_features['Word Composition'], disabled=True)
+            st.text_input('TLD Score', domain_features['TLD Score'], disabled=True)
+            st.text_input('Search Queries Occurrences', domain_features['Search Queries Occurrences'], disabled=True)
+       
 
             # Button to make prediction
             if st.button('Predict Domain Price'):
