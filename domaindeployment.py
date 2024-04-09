@@ -23,27 +23,31 @@ if uploaded_file is not None:
         selected_domain = st.selectbox('Select a Domain to Predict', data['Name'].unique())
 
         # Get the features of the selected domain
-        domain_features = data[data['Name'] == selected_domain][['Age of Domain', 'TLD Score', 'Search Queries Occurrences', 'Length Score', 'Word Composition']]
+        domain_features = data[data['Name'] == selected_domain][['Age of Domain', 'TLD Score', 'Search Queries Occurrences', 'Length Score', 'Word Composition']].iloc[0]
 
         # Display the features in separate text input fields
         if not domain_features.empty:
             st.write('Features of the selected domain:')
-            feature_values = domain_features.iloc[0]
-
-            # Display each feature in a separate text input field, which is read-only
-            for feature in feature_values.index:
-                st.text_input(feature, feature_values[feature], disabled=True)
+            st.text_input('Age of Domain', domain_features['Age of Domain'], disabled=True)
+            st.text_input('TLD Score', domain_features['TLD Score'], disabled=True)
+            st.text_input('Search Queries Occurrences', domain_features['Search Queries Occurrences'], disabled=True)
+            st.text_input('Length Score', domain_features['Length Score'], disabled=True)
+            st.text_input('Word Composition', domain_features['Word Composition'], disabled=True)
 
             # Button to make prediction
             if st.button('Predict Domain Price'):
-                # Reshape the data for prediction
-                prediction_features = feature_values.values.reshape(1, -1)
+                # Prepare the features for prediction
+                prediction_features = np.array([[
+                    domain_features['Age of Domain'],
+                    domain_features['TLD Score'],
+                    domain_features['Search Queries Occurrences'],
+                    domain_features['Length Score'],
+                    domain_features['Word Composition']
+                ]])
                 # Predict the price
                 log_price_prediction = model.predict(prediction_features)
-
-                # Convert the log price prediction back to original scale
-                # Assuming you used np.log() to get the log_price during training, you'd use np.exp() to reverse it
-                original_price_prediction = np.exp(log_price_prediction)
+                # Convert the log price prediction back to the original price scale
+                original_price_prediction = np.exp(log_price_prediction)  # Replace with appropriate transformation
 
                 # Display the prediction
                 st.write(f'The predicted price for "{selected_domain}" is: ${original_price_prediction[0]:,.2f}')
