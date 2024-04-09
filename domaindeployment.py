@@ -65,7 +65,7 @@ if uploaded_file is not None:
        
 
             # Button to make prediction
-            if st.button('Predict Domain Price'):
+            if st.button('Predict Domain Values'):
                 # Prepare the features for prediction
                 prediction_features = np.array([[
                     domain_features['Age of Domain'],
