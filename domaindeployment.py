@@ -3,26 +3,42 @@ import pandas as pd
 import joblib
 import numpy as np
 
+
+# Custom CSS to inject into the Streamlit app
+st.markdown("""
+<style>
+    /* This affects the Streamlit app's background color */
+    .stApp {
+        background-color: #262730;
+    }
+    
+    /* This affects the title color */
+    h1 {
+        color: #FFCD00;
+        background-color: #262730;
+    }
+    
+    /* Modify button color */
+    .stButton>button {
+        color: #ffffff;
+        background-color: #FFCD00;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 24px;
+    }
+    
+    /* Modify button hover effect */
+    .stButton>button:hover {
+        background-color: #e6b800;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Your main title using markdown
+st.markdown('<h1 style="color: #FFCD00;">Flight Delay Prediction System</h1>', unsafe_allow_html=True)
+
 # Load your trained model
 model = joblib.load('domain_rf_model.joblib')
-
-# Define CSS style for the app
-def set_custom_style():
-    # Apply custom CSS to change background color and title color
-    custom_style = f"""
-        <style>
-            .reportview-container .main {{
-                background-color: black;  /* Set background color */
-            }}
-            h1 {{
-                color: yellow;  /* Set title color */
-            }}
-        </style>
-    """
-    st.markdown(custom_style, unsafe_allow_html=True)
-
-# Call the function to set custom styles
-set_custom_style()
 
 # Define the structure of your web app
 st.title('Domain Name Values Prediction')
