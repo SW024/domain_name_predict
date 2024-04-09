@@ -4,44 +4,23 @@ import joblib
 import numpy as np
 
 
-# Custom CSS to inject into the Streamlit app
-st.markdown("""
-<style>
-    /* This affects the Streamlit app's background color */
-    .stApp {
-        background-color: #262730;
-    }
-    
-    /* This affects the title color */
-    h1 {
-        color: #FFCD00;
-        background-color: #262730;
-    }
-    
-    /* Modify button color */
-    .stButton>button {
-        color: #ffffff;
-        background-color: #FFCD00;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 24px;
-    }
-    
-    /* Modify button hover effect */
+# Custom HTML and CSS for the title and button hover effect
+html_temp = """
+    <div style="background-color:yellow;padding:15px">
+    <h1 style="color:black;text-align:center;">Flight Delay Prediction System</h1>
+    </div>
+
+    <style>
     .stButton>button:hover {
-        background-color: #e6b800;
+        background-color: #0b6fa4;  /* Darker blue on hover */
+        color: white;
+        transform: scale(1.1);     /* Optional: Scale up effect on hover */
     }
-</style>
-""", unsafe_allow_html=True)
+    </style>
+"""
 
-# Your main title using markdown
-st.markdown('<h1 style="color: #FFCD00;">Flight Delay Prediction System</h1>', unsafe_allow_html=True)
-
-# Load your trained model
-model = joblib.load('domain_rf_model.joblib')
-
-# Define the structure of your web app
-st.title('Domain Name Values Prediction')
+# Display the custom HTML with style
+st.markdown(html_temp, unsafe_allow_html=True)
 
 # File uploader allows user to add their own CSV
 uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
