@@ -35,7 +35,7 @@ html_temp = """
 # Display the custom HTML with style
 st.markdown(html_temp, unsafe_allow_html=True)
 
-# Load your trained model
+# Load the trained model
 model = joblib.load('domain_rf_model.joblib')
 
 # File uploader allows user to add their own CSV
@@ -64,7 +64,7 @@ if uploaded_file is not None:
             st.text_input('Search Queries Occurrences', domain_features['Search Queries Occurrences'], disabled=True)
        
 
-            # Button to make prediction
+            # Button to make a prediction
             if st.button('Predict Domain Values'):
                 # Prepare the features for prediction
                 prediction_features = np.array([[
@@ -84,4 +84,4 @@ if uploaded_file is not None:
         else:
             st.error('No features found for the selected domain.')
     else:
-        st.error('CSV must have a "Name" column.')
+        st.error('CSV must have a Domain Name column.')
