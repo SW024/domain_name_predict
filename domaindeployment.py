@@ -11,16 +11,32 @@ html_temp = """
     </div>
 
     <style>
+    .stButton {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+    }
+
+    .stButton>button {
+        background-color: #FFCD00;
+        color: black;
+        border-radius: 5px;
+        padding: 0.25rem 1rem;
+        border: none;
+    }
+
     .stButton>button:hover {
-        background-color: #0b6fa4;  /* Darker blue on hover */
+        background-color: #EF1E1E;
         color: white;
-        transform: scale(1.1);     /* Optional: Scale up effect on hover */
     }
     </style>
 """
 
 # Display the custom HTML with style
 st.markdown(html_temp, unsafe_allow_html=True)
+
+# Load your trained model
+model = joblib.load('domain_rf_model.joblib')
 
 # File uploader allows user to add their own CSV
 uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
